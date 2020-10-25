@@ -1,6 +1,12 @@
 angular.module('KRRclass', ['chart.js']).controller('MainCtrl', ['$scope', '$http', mainCtrl]);
 
 function mainCtrl($scope, $http) {
+	// CANVAS
+	const canvas = document.querySelector('canvas');
+	console.log(canvas)
+
+
+
 
 	var country1 = document.getElementById("country_select_1");
 	country1.onchange = function () {
