@@ -1,18 +1,4 @@
-.footer-sticky {
+#carousel_main {
     position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-}
-
-.bg-acl {
-	background-color: #8fab8e;
-}
-
-.a-acl {
-	color: #3c3c3c!important;
-}
-
-.my-card:hover {
-	border-color: #f58723;
+    left: 50vh;
 }

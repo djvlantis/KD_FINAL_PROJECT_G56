@@ -1,9 +1,9 @@
 angular.module('KRRclass', ['chart.js']).controller('MainCtrl', ['$scope', '$http', mainCtrl]);
 
 function mainCtrl($scope, $http) {
-	// CANVAS
-	const canvas = document.querySelector('canvas');
-	console.log(canvas)
+	// // CANVAS
+	// const canvas = document.querySelector('canvas');
+	// console.log(canvas)
 
 
 
