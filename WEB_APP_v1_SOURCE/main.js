@@ -7,14 +7,21 @@ function mainCtrl($scope, $http) {
 
 
 
+	var index = 0;
+	var clickerNext = document.getElementById("click_next");
+	clickerNext.onclick = function () {
+		$scope.startMyAwesomeApp()
+		index++;
+		console.log(index);
+	}
 
-	// var country1 = document.getElementById("country_select_1");
-	// country1.onchange = function () {
-	// 	console.log(country1.value);
-	// 	$scope.startMyAwesomeApp()
-
-
-	// }
+	var index = 0;
+	var clickerPrevious = document.getElementById("click_previous");
+	clickerPrevious.onclick = function () {
+		$scope.startMyAwesomeApp()
+		index--;
+		console.log(index);
+	}
 
 	// var country2 = document.getElementById("country_select_2");
 	// country2.onchange = function () {
@@ -59,8 +66,14 @@ function mainCtrl($scope, $http) {
 					$scope.myDynamicHost.push(val.Host.value);
 				});
 				$scope.myDynamicData = [$scope.myDynamicPlanet, $scope.myDynamicHost]
-				console.log($scope.myDynamicPlanet)
-				console.log("myDynamicPlanet")
+				console.log($scope.myDynamicData)
+				console.log("myDynamicData")
+
+				for (const row of $scope.myDynamicData) {
+					console.log(row);
+					console.log(row[index])
+
+				}
 
 			})
 			.error(function (error) {
