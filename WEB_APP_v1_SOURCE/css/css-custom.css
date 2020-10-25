@@ -1,4 +1,13 @@
+body {
+    background-color: lightblue;
+}
+
 #carousel_main {
     position: fixed;
-    left: 50vh;
+    left: 65vh;
+}
+
+.carousel-indicators {
+    text-align: right;
+    top: 50% !important;
 }
