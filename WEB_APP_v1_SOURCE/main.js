@@ -23,6 +23,8 @@ function mainCtrl($scope, $http) {
 		console.log(index);
 	}
 
+
+
 	// var country2 = document.getElementById("country_select_2");
 	// country2.onchange = function () {
 	// 	console.log(country2.value);
@@ -32,7 +34,7 @@ function mainCtrl($scope, $http) {
 	$scope.startMyAwesomeApp = function () {
 
 		// graph 1
-		$scope.myDisplayMessage = "";
+		$scope.myDisplayMessage = "test";
 		$scope.myDisplayDescription = ""
 		$scope.mySparqlEndpoint = "http://192.168.18.4:7200/repositories/repo17";
 		$scope.mySparqlQuery = encodeURI(`PREFIX on:<http://www.example.org/KD/FP/ontology/>
@@ -66,14 +68,21 @@ function mainCtrl($scope, $http) {
 					$scope.myDynamicHost.push(val.Host.value);
 				});
 				$scope.myDynamicData = [$scope.myDynamicPlanet, $scope.myDynamicHost]
-				console.log($scope.myDynamicData)
-				console.log("myDynamicData")
+				// console.log($scope.myDynamicPlanet)
+				// console.log("myDynamicPlanet")
 
-				for (const row of $scope.myDynamicData) {
-					console.log(row);
-					console.log(row[index])
+				// for (const row of $scope.myDynamicData) {
+				// 	// console.log(row);
+				// 	console.log(row[index])
+				// }
 
-				}
+				console.log($scope.myDynamicPlanet[index]);
+				$scope.Planet = $scope.myDynamicPlanet[index];
+
+				console.log($scope.myDynamicHost[index]);
+				$scope.PlanetHost = $scope.myDynamicHost[index];
+
+
 
 			})
 			.error(function (error) {
@@ -83,5 +92,6 @@ function mainCtrl($scope, $http) {
 
 	};
 	$scope.startMyAwesomeApp()
+
 
 }
