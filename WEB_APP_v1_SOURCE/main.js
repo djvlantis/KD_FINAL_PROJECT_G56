@@ -28,6 +28,25 @@ function mainCtrl($scope, $http) {
 			console.log(index);
 		}
 	}
+	var req1_text = '?PlanetName a oon:PotentiallyInhabitablePlanet.'
+	var blank1 = ''
+	var inhabitable_cb = document.getElementById('check_inhabitable');
+	inhabitable_cb.onclick = function () {
+		if (document.querySelector('#check_inhabitable:checked') !== null) {
+			console.log('inhabitable filter on')
+			blank1 = req1_text
+			console.log(blank1)
+			$scope.startMyAwesomeApp()
+
+		} else {
+			console.log('inhabitable filter off')
+			blank1 = ''
+			console.log(blank1)
+			$scope.startMyAwesomeApp()
+		}
+	}
+
+
 
 
 
@@ -44,23 +63,26 @@ function mainCtrl($scope, $http) {
 		$scope.myDisplayMessage = "test";
 		$scope.myDisplayDescription = ""
 		$scope.mySparqlEndpoint = "http://192.168.18.4:7200/repositories/repo18";
-		$scope.mySparqlQuery = encodeURI(`PREFIX on: <http://www.example.org/KD/FP/ontology/>
-											PREFIX oon: <http://www.example.org/KD/FP/ontology#>
-											PREFIX owl: <http://www.w3.org/2002/07/owl#>
-											
-											SELECT ?PlanetName (SAMPLE (?Density) AS ?Density)  (SAMPLE (?Mass) AS ?Mass) (SAMPLE (?Size) AS ?Size) 
-											(SAMPLE (?NumberOfStars) AS ?NumberOfStars) (SAMPLE (?Host) AS ?Host) (SAMPLE (?Temp) AS ?Temp) (SAMPLE (?StellarTemp) AS ?StellarTemp)
-																						WHERE  { ?PlanetName a  on:Planet ;
-																								on:HasHostName ?Host.
-																							OPTIONAL { ?PlanetName  on:HasDensity  ?Density }
-																							OPTIONAL { ?PlanetName  on:HasMass  ?Mass }
-																							OPTIONAL { ?PlanetName  on:HasRadius  ?Size }
-																							OPTIONAL { ?PlanetName  on:HasNumberOfHosts  ?NumberOfStars }
-																							OPTIONAL { ?PlanetName  on:HasTemperature  ?Temp }
-																							OPTIONAL { ?PlanetName  on:HasHostTemperature  ?StellarTemp }
-																							}
-											GROUP BY ?PlanetName
-											LIMIT 50`).replace(/#/g, '%23');
+		$scope.mySparqlQuery = encodeURI(`PREFIX on:<http://www.example.org/KD/FP/ontology/>
+		PREFIX oon:<http://www.example.org/KD/FP/ontology#>
+		PREFIX owl: <http://www.w3.org/2002/07/owl#>
+		PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+		PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+		SELECT ?PlanetName (SAMPLE (?Density) AS ?Density)  (SAMPLE (?Mass) AS ?Mass) (SAMPLE (?Size) AS ?Size) 
+		(SAMPLE (?NumberOfStars) AS ?NumberOfStars) (SAMPLE (?Host) AS ?Host) (SAMPLE (?Temp) AS ?Temp) (SAMPLE (?StellarTemp) AS ?StellarTemp)
+													WHERE  { ?PlanetName a  on:Planet .
+														${blank1}
+														OPTIONAL { ?PlanetName  on:HasDensity  ?Density }
+														OPTIONAL { ?PlanetName  on:HasMass  ?Mass }
+														OPTIONAL { ?PlanetName  on:HasRadius  ?Size }
+														OPTIONAL { ?PlanetName  on:HasNumberOfHosts  ?NumberOfStars }
+														OPTIONAL { ?PlanetName  on:HasTemperature  ?Temp }
+														OPTIONAL { ?PlanetName  on:HasHostTemperature  ?StellarTemp }
+		}
+		
+		GROUP BY ?PlanetName
+		LIMIT 50
+		`).replace(/#/g, '%23');
 
 		$http({
 				method: "GET",

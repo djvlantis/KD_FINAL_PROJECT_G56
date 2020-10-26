@@ -6,11 +6,6 @@ body {
 
 }
 
-#carousel_main {
-    position: fixed;
-    left: 40vw;
-    top: 20vh;
-}
 
 .carousel-indicators li {
     width: 10px;
@@ -46,4 +41,9 @@ h3 {
     max-height: 500px;
 
 
+}
+
+label {
+    color: lightgrey;
+    text-shadow: 2px 2px black;
 }
