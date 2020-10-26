@@ -8,20 +8,25 @@ function mainCtrl($scope, $http) {
 
 
 	var index = 0;
-	var max = 0;
 
 	var clickerNext = document.getElementById("click_next");
 	clickerNext.onclick = function () {
 		$scope.startMyAwesomeApp()
-		index++
-		console.log(index);
+		if (index < max - 1) {
+			index++
+			console.log(index);
+		}
+
+
 	}
 
 	var clickerPrevious = document.getElementById("click_previous");
 	clickerPrevious.onclick = function () {
 		$scope.startMyAwesomeApp()
-		index--
-		console.log(index);
+		if (index > 0) {
+			index--
+			console.log(index);
+		}
 	}
 
 
@@ -38,20 +43,23 @@ function mainCtrl($scope, $http) {
 		$scope.myDisplayMessage = "test";
 		$scope.myDisplayDescription = ""
 		$scope.mySparqlEndpoint = "http://192.168.18.4:7200/repositories/repo18";
-		$scope.mySparqlQuery = encodeURI(`PREFIX on:<http://www.example.org/KD/FP/ontology/>
-											PREFIX oon:<http://www.example.org/KD/FP/ontology#>
+		$scope.mySparqlQuery = encodeURI(`PREFIX on: <http://www.example.org/KD/FP/ontology/>
+											PREFIX oon: <http://www.example.org/KD/FP/ontology#>
 											PREFIX owl: <http://www.w3.org/2002/07/owl#>
 											
-											SELECT ?PlanetName ?Density ?Mass ?Size ?NumberOfStars ?Host ?Temp ?StellarTemp
-											WHERE  { ?PlanetName a  on:Planet ;
-													on:HasHostName ?Host.
-												OPTIONAL { ?PlanetName  on:HasDensity  ?Density }
-												OPTIONAL { ?PlanetName  on:HasMass  ?Mass }
-												OPTIONAL { ?PlanetName  on:HasRadius  ?Size }
-												OPTIONAL { ?PlanetName  on:HasNumberOfHosts  ?NumberOfStars }
-												OPTIONAL { ?PlanetName  on:HasTemperature  ?Temp }
-												OPTIONAL { ?PlanetName  on:HasHostTemperature  ?StellarTemp }
-												}LIMIT 10`).replace(/#/g, '%23');
+											SELECT ?PlanetName (SAMPLE (?Density) AS ?Density)  (SAMPLE (?Mass) AS ?Mass) (SAMPLE (?Size) AS ?Size) 
+											(SAMPLE (?NumberOfStars) AS ?NumberOfStars) (SAMPLE (?Host) AS ?Host) (SAMPLE (?Temp) AS ?Temp) (SAMPLE (?StellarTemp) AS ?StellarTemp)
+																						WHERE  { ?PlanetName a  on:Planet ;
+																								on:HasHostName ?Host.
+																							OPTIONAL { ?PlanetName  on:HasDensity  ?Density }
+																							OPTIONAL { ?PlanetName  on:HasMass  ?Mass }
+																							OPTIONAL { ?PlanetName  on:HasRadius  ?Size }
+																							OPTIONAL { ?PlanetName  on:HasNumberOfHosts  ?NumberOfStars }
+																							OPTIONAL { ?PlanetName  on:HasTemperature  ?Temp }
+																							OPTIONAL { ?PlanetName  on:HasHostTemperature  ?StellarTemp }
+																							}
+											GROUP BY ?PlanetName
+											LIMIT 10`).replace(/#/g, '%23');
 
 		$http({
 				method: "GET",
@@ -77,6 +85,7 @@ function mainCtrl($scope, $http) {
 					// $scope.myDynamicLabels.push(val.country.value.split('/')[3]);
 					$scope.myDynamicPlanetName.push(val.PlanetName.value.split('/')[6]);
 
+					//replace missing data with n/a to avioud undefined error
 					if (val.Density === undefined) {
 
 						$scope.myDynamicDensity.push('n/a')
@@ -161,12 +170,12 @@ function mainCtrl($scope, $http) {
 				console.log($scope.myDynamicStellarTemp[index]);
 				$scope.StellarTemp = $scope.myDynamicStellarTemp[index];
 
-
-
+				max = $scope.myDynamicPlanetName.length
 			})
 			.error(function (error) {
 				console.log('Error running the input query!' + error);
 			});
+
 
 
 	};
