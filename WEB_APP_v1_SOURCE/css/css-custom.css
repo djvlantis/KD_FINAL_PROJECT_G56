@@ -1,5 +1,9 @@
 body {
-    background-color: lightblue;
+    /* background-color: lightblue; */
+    background-image: url('/img/space_bg.jpg');
+    background-size: 100% auto;
+
+
 }
 
 #carousel_main {
@@ -17,5 +21,11 @@ body {
     position: absolute !important;
     bottom: -100px;
 
+
+}
+
+h5 {
+    color: lightgrey;
+    text-shadow: 2px 2px black;
 
 }

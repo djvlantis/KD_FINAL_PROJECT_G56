@@ -31,6 +31,7 @@ function mainCtrl($scope, $http) {
 
 
 
+
 	// var country2 = document.getElementById("country_select_2");
 	// country2.onchange = function () {
 	// 	console.log(country2.value);
@@ -126,7 +127,11 @@ function mainCtrl($scope, $http) {
 						$scope.myDynamicTemp.push('n/a')
 					} else {
 						$scope.myDynamicTemp.push(val.Temp.value);
+						if ($scope.myDynamicTemp[index] < 273) {
+							document.getElementById("CarouselImg").src = "img/cold_planet_img.png";
+						}
 					}
+					// console.log($scope.myDynamicTemp[index])
 
 					if (val.StellarTemp === undefined) {
 
@@ -134,6 +139,8 @@ function mainCtrl($scope, $http) {
 					} else {
 						$scope.myDynamicStellarTemp.push(val.StellarTemp.value);
 					}
+
+
 
 				});
 				$scope.myDynamicData = [$scope.myDynamicPlanetName, $scope.myDynamicDensity, $scope.myDynamicMass, $scope.myDynamicSize, $scope.myDynamicNumberOfStars, $scope.myDynamicHost, $scope.myDynamicTemp, $scope.myDynamicStellarTemp]
