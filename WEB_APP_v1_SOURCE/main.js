@@ -76,7 +76,7 @@ function mainCtrl($scope, $http) {
 				angular.forEach(data.results.bindings, function (val) {
 					// $scope.myDynamicLabels.push(val.country.value.split('/')[3]);
 					$scope.myDynamicPlanetName.push(val.PlanetName.value.split('/')[6]);
-					// $scope.myDynamicDensity.push(val.Density.value);s
+					// $scope.myDynamicDensity.push(val.Density.value);
 					$scope.myDynamicMass.push(val.Mass.value);
 					$scope.myDynamicSize.push(val.Size.value);
 					$scope.myDynamicNumberOfStars.push(val.NumberOfStars.value);
