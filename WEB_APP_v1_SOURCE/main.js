@@ -114,9 +114,16 @@ function mainCtrl($scope, $http) {
 
 					if (val.Temp === undefined) {
 
-						$scope.myDynamicStellarTemp.push('n/a')
+						$scope.myDynamicTemp.push('n/a')
 					} else {
 						$scope.myDynamicTemp.push(val.Temp.value);
+					}
+
+					if (val.StellarTemp === undefined) {
+
+						$scope.myDynamicStellarTemp.push('n/a')
+					} else {
+						$scope.myDynamicStellarTemp.push(val.StellarTemp.value);
 					}
 
 				});
