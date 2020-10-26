@@ -13,18 +13,14 @@ function mainCtrl($scope, $http) {
 	var clickerNext = document.getElementById("click_next");
 	clickerNext.onclick = function () {
 		$scope.startMyAwesomeApp()
-		if (index <= max) {
-			index++;
-		}
+		index++
 		console.log(index);
 	}
 
 	var clickerPrevious = document.getElementById("click_previous");
 	clickerPrevious.onclick = function () {
 		$scope.startMyAwesomeApp()
-		if (index > max) {
-			index--;
-		}
+		index--
 		console.log(index);
 	}
 
@@ -41,18 +37,21 @@ function mainCtrl($scope, $http) {
 		// graph 1
 		$scope.myDisplayMessage = "test";
 		$scope.myDisplayDescription = ""
-		$scope.mySparqlEndpoint = "http://192.168.0.107:7200/repositories/KAND_Final_Version_With_Inferrals";
+		$scope.mySparqlEndpoint = "http://192.168.18.4:7200/repositories/repo18";
 		$scope.mySparqlQuery = encodeURI(`PREFIX on:<http://www.example.org/KD/FP/ontology/>
 											PREFIX oon:<http://www.example.org/KD/FP/ontology#>
 											PREFIX owl: <http://www.w3.org/2002/07/owl#>
-											SELECT DISTINCT ?Planet ?Host
-											WHERE 
-											{
-											?Planet a on:Planet;
-													a oon:PotentiallyInhabitablePlanet;
-													on:HasHostName ?Host
 											
-											}LIMIT 10`).replace(/#/g, '%23');
+											SELECT ?PlanetName ?Density ?Mass ?Size ?NumberOfStars ?Host ?Temp ?StellarTemp
+											WHERE  { ?PlanetName a  on:Planet ;
+													on:HasHostName ?Host.
+												OPTIONAL { ?PlanetName  on:HasDensity  ?Density }
+												OPTIONAL { ?PlanetName  on:HasMass  ?Mass }
+												OPTIONAL { ?PlanetName  on:HasRadius  ?Size }
+												OPTIONAL { ?PlanetName  on:HasNumberOfHosts  ?NumberOfStars }
+												OPTIONAL { ?PlanetName  on:HasTemperature  ?Temp }
+												OPTIONAL { ?PlanetName  on:HasHostTemperature  ?StellarTemp }
+												}`).replace(/#/g, '%23');
 
 		$http({
 				method: "GET",
@@ -64,30 +63,28 @@ function mainCtrl($scope, $http) {
 			})
 			.success(function (data, status) {
 				$scope.myDynamicLabels = [];
-				$scope.myDynamicPlanet = [];
+				$scope.myDynamicPlanetName = [];
 				$scope.myDynamicHost = [];
 				// now iterate on the results
 				angular.forEach(data.results.bindings, function (val) {
 					// $scope.myDynamicLabels.push(val.country.value.split('/')[3]);
-					$scope.myDynamicPlanet.push(val.Planet.value.split('/')[6]);
+					$scope.myDynamicPlanetName.push(val.PlanetName.value.split('/')[6]);
 					$scope.myDynamicHost.push(val.Host.value);
 				});
-				$scope.myDynamicData = [$scope.myDynamicPlanet, $scope.myDynamicHost]
-				// console.log($scope.myDynamicPlanet)
-				// console.log("myDynamicPlanet")
+				$scope.myDynamicData = [$scope.myDynamicPlanetName, $scope.myDynamicHost]
+				console.log($scope.myDynamicData)
+				console.log("myDynamicData")
 
 				// for (const row of $scope.myDynamicData) {
 				// 	// console.log(row);
 				// 	console.log(row[index])
 				// }
 
-				console.log($scope.myDynamicPlanet[index]);
-				$scope.Planet = $scope.myDynamicPlanet[index].replace(/%20/gi, ' ');
+				console.log($scope.myDynamicPlanetName[index]);
+				$scope.Planet = $scope.myDynamicPlanetName[index].replace(/%20/gi, ' ');
 
 				console.log($scope.myDynamicHost[index]);
 				$scope.PlanetHost = $scope.myDynamicHost[index];
-
-				max = $scope.myDynamicPlanet.length
 
 
 
