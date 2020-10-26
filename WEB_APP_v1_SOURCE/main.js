@@ -169,6 +169,19 @@ function mainCtrl($scope, $http) {
 						$scope.myDynamicStellarTemp.push('n/a')
 					} else {
 						$scope.myDynamicStellarTemp.push(val.StellarTemp.value);
+						if (30000 < $scope.myDynamicStellarTemp < 52000) {
+							blank2 = 'O'
+						} else if (10000 < $scope.myDynamicStellarTemp < 30000) {
+							blank2 = 'B'
+						} else if (76000 < $scope.myDynamicStellarTemp < 10000) {
+							blank2 = 'A'
+						} else if (6000 < $scope.myDynamicStellarTemp < 7600) {
+							blank2 = 'F'
+						} else if (5300 < $scope.myDynamicStellarTemp < 6000) {
+							blank2 = 'G'
+						} else if (3900 < $scope.myDynamicStellarTemp < 5300) {
+							blank2 = 'K'
+						}
 					}
 
 
