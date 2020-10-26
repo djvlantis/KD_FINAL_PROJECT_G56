@@ -41,7 +41,7 @@ function mainCtrl($scope, $http) {
 		// graph 1
 		$scope.myDisplayMessage = "test";
 		$scope.myDisplayDescription = ""
-		$scope.mySparqlEndpoint = "http://192.168.18.4:7200/repositories/repo17";
+		$scope.mySparqlEndpoint = "http://192.168.0.107:7200/repositories/KAND_Final_Version_With_Inferrals";
 		$scope.mySparqlQuery = encodeURI(`PREFIX on:<http://www.example.org/KD/FP/ontology/>
 											PREFIX oon:<http://www.example.org/KD/FP/ontology#>
 											PREFIX owl: <http://www.w3.org/2002/07/owl#>
