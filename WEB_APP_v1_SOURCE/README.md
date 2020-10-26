@@ -8,7 +8,8 @@
 
 ## Steps
 * Create a new repository in GraphDB, and name it `repo-G56`
-* Import the `v3_1_with_inferals.ttl` dataset into this repository (Import --> RDF --> Upload RDF Files)
+* Import the `v3_1_with_inferals.ttl` dataset into this repository (Import --> RDF --> Upload RDF Files) and
+  click import.
 * Copy the IRI of your repository and place it in main.js file as such:
     $scope.mySparqlEndpoint = "your IRI";
 * Open `index.html` in your browser
@@ -19,4 +20,4 @@
 * To the right of the image of the planet is a checkbox to only show habitable planets.
   The habitability of the planet has been determined through class restrictions in the underlying ontology that you have uploaded into graphdb.
 
-  
+

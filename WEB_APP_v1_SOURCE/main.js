@@ -30,6 +30,7 @@ function mainCtrl($scope, $http) {
 	}
 	var req1_text = '?PlanetName a oon:PotentiallyInhabitablePlanet.'
 	var blank1 = ''
+	var blank2 = 'K'
 	var inhabitable_cb = document.getElementById('check_inhabitable');
 	inhabitable_cb.onclick = function () {
 		if (document.querySelector('#check_inhabitable:checked') !== null) {
@@ -60,7 +61,6 @@ function mainCtrl($scope, $http) {
 	$scope.startMyAwesomeApp = function () {
 
 		// graph 1
-		$scope.myDisplayMessage = "test";
 		$scope.myDisplayDescription = ""
 		$scope.mySparqlEndpoint = "http://192.168.18.4:7200/repositories/repo18";
 		$scope.mySparqlQuery = encodeURI(`PREFIX on:<http://www.example.org/KD/FP/ontology/>
@@ -203,6 +203,41 @@ function mainCtrl($scope, $http) {
 				$scope.StellarTemp = $scope.myDynamicStellarTemp[index];
 
 				max = $scope.myDynamicPlanetName.length
+			})
+			.error(function (error) {
+				console.log('Error running the input query!' + error);
+			});
+
+		//QUERY 2
+		$scope.mySparqlEndpoint = "http://dbpedia.org/sparql";
+		$scope.mySparqlQuery = encodeURI(`prefix dbpedia: <http://dbpedia.org/resource/>
+											prefix dbpedia-owl: <http://dbpedia.org/ontology/>
+											
+											select ?abstract where { 
+											dbpedia:${blank2}-type_main-sequence_star dbpedia-owl:abstract ?abstract .
+											filter(langMatches(lang(?abstract),"en"))
+											}`).replace(/#/g, '%23');
+
+		$http({
+				method: "GET",
+				url: $scope.mySparqlEndpoint + "?query=" + $scope.mySparqlQuery,
+				headers: {
+					'Accept': 'application/sparql-results+json',
+					'Content-Type': 'application/sparql-results+json'
+				}
+			})
+			.success(function (data, status) {
+				$scope.myDynamicLabels = [];
+				$scope.myDynamicabstract = [];
+
+				// now iterate on the results
+				angular.forEach(data.results.bindings, function (val) {
+					$scope.myDynamicabstract.push(val.abstract.value);
+				});
+				$scope.myDynamicData = [$scope.myDynamicabstract]
+				$scope.PlanetAbstract = $scope.myDynamicabstract[0]
+				console.log($scope.PlanetAbstract)
+
 			})
 			.error(function (error) {
 				console.log('Error running the input query!' + error);

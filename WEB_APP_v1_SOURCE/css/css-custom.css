@@ -47,3 +47,10 @@ label {
     color: lightgrey;
     text-shadow: 2px 2px black;
 }
+
+#abstract1 {
+    color: lightgrey;
+    text-shadow: 2px 2px black;
+    font-size: auto;
+    width: 300px;
+}
