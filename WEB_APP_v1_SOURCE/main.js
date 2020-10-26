@@ -60,7 +60,7 @@ function mainCtrl($scope, $http) {
 																							OPTIONAL { ?PlanetName  on:HasHostTemperature  ?StellarTemp }
 																							}
 											GROUP BY ?PlanetName
-											LIMIT 10`).replace(/#/g, '%23');
+											LIMIT 50`).replace(/#/g, '%23');
 
 		$http({
 				method: "GET",
@@ -127,8 +127,17 @@ function mainCtrl($scope, $http) {
 						$scope.myDynamicTemp.push('n/a')
 					} else {
 						$scope.myDynamicTemp.push(val.Temp.value);
+						document.getElementById("CarouselImg").src = "img/SeekPng.com_crying-emoji-png_189202.png";
+						document.getElementById("CarouselImg2").src = "img/SeekPng.com_crying-emoji-png_189202.png";
 						if ($scope.myDynamicTemp[index] < 273) {
 							document.getElementById("CarouselImg").src = "img/cold_planet_img.png";
+							document.getElementById("CarouselImg2").src = "img/cold_planet_img.png";
+						} else if ($scope.myDynamicTemp[index] > 373) {
+							document.getElementById("CarouselImg").src = "img/hot_planet_img.png";
+							document.getElementById("CarouselImg2").src = "img/hot_planet_img.png";
+						} else {
+							document.getElementById("CarouselImg").src = "img/SeekPng.com_crying-emoji-png_189202.png";
+							document.getElementById("CarouselImg2").src = "img/SeekPng.com_crying-emoji-png_189202.png";
 						}
 					}
 					// console.log($scope.myDynamicTemp[index])

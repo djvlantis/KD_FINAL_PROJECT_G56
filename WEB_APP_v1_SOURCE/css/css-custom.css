@@ -8,7 +8,8 @@ body {
 
 #carousel_main {
     position: fixed;
-    left: 65vh;
+    left: 40vw;
+    top: 20vh;
 }
 
 .carousel-indicators li {
@@ -27,5 +28,22 @@ body {
 h5 {
     color: lightgrey;
     text-shadow: 2px 2px black;
+
+}
+
+h3 {
+    color: lightgrey;
+    text-shadow: 2px 2px black;
+
+}
+
+#CarouselImg {
+    max-height: 500px;
+
+}
+
+#CarouselImg2 {
+    max-height: 500px;
+
 
 }
