@@ -178,12 +178,6 @@ function mainCtrl($scope, $http) {
 				console.log("myDynamicData")
 				console.log($scope.myDynamicData)
 
-
-				// for (const row of $scope.myDynamicData) {
-				// 	// console.log(row);
-				// 	console.log(row[index])
-				// }
-
 				console.log($scope.myDynamicPlanetName[index]);
 				$scope.Planet = $scope.myDynamicPlanetName[index].replace(/%20/gi, ' ');
 
