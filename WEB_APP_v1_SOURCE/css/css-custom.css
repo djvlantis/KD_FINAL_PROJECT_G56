@@ -7,7 +7,14 @@ body {
     left: 65vh;
 }
 
-.carousel-control-next-icon {
-    color: black;
-    border-color: black;
+.carousel-indicators li {
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+}
+
+.carousel-caption {
+    position: absolute !important;
+    left: 10% !important;
+
 }

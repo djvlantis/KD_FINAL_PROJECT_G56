@@ -82,7 +82,7 @@ function mainCtrl($scope, $http) {
 				// }
 
 				console.log($scope.myDynamicPlanet[index]);
-				$scope.Planet = $scope.myDynamicPlanet[index].replace(/%20/g, ' ');;
+				$scope.Planet = $scope.myDynamicPlanet[index].replace(/%20/gi, ' ');
 
 				console.log($scope.myDynamicHost[index]);
 				$scope.PlanetHost = $scope.myDynamicHost[index];
