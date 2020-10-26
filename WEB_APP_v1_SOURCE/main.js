@@ -76,13 +76,49 @@ function mainCtrl($scope, $http) {
 				angular.forEach(data.results.bindings, function (val) {
 					// $scope.myDynamicLabels.push(val.country.value.split('/')[3]);
 					$scope.myDynamicPlanetName.push(val.PlanetName.value.split('/')[6]);
-					// $scope.myDynamicDensity.push(val.Density.value);
-					$scope.myDynamicMass.push(val.Mass.value);
-					$scope.myDynamicSize.push(val.Size.value);
-					$scope.myDynamicNumberOfStars.push(val.NumberOfStars.value);
-					$scope.myDynamicHost.push(val.Host.value);
-					// $scope.myDynamicTemp.push(val.Temp.value);
-					$scope.myDynamicStellarTemp.push(val.StellarTemp.value);
+
+					if (val.Density === undefined) {
+
+						$scope.myDynamicDensity.push('n/a')
+					} else {
+						$scope.myDynamicDensity.push(val.Density.value);
+					}
+
+					if (val.Mass === undefined) {
+
+						$scope.myDynamicMass.push('n/a')
+					} else {
+						$scope.myDynamicMass.push(val.Mass.value);
+					}
+
+					if (val.Size === undefined) {
+
+						$scope.myDynamicSize.push('n/a')
+					} else {
+						$scope.myDynamicSize.push(val.Size.value);
+					}
+
+					if (val.NumberOfStars === undefined) {
+
+						$scope.myDynamicNumberOfStars.push('n/a')
+					} else {
+						$scope.myDynamicNumberOfStars.push(val.NumberOfStars.value);
+					}
+
+					if (val.Host === undefined) {
+
+						$scope.myDynamicHost.push('n/a')
+					} else {
+						$scope.myDynamicHost.push(val.Host.value);
+					}
+
+					if (val.Temp === undefined) {
+
+						$scope.myDynamicStellarTemp.push('n/a')
+					} else {
+						$scope.myDynamicTemp.push(val.Temp.value);
+					}
+
 				});
 				$scope.myDynamicData = [$scope.myDynamicPlanetName, $scope.myDynamicDensity, $scope.myDynamicMass, $scope.myDynamicSize, $scope.myDynamicNumberOfStars, $scope.myDynamicHost, $scope.myDynamicTemp, $scope.myDynamicStellarTemp]
 				console.log("myDynamicData")
