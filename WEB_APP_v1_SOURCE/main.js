@@ -8,18 +8,23 @@ function mainCtrl($scope, $http) {
 
 
 	var index = 0;
+	var max = 0;
+
 	var clickerNext = document.getElementById("click_next");
 	clickerNext.onclick = function () {
 		$scope.startMyAwesomeApp()
-		index++;
+		if (index <= max) {
+			index++;
+		}
 		console.log(index);
 	}
 
-	var index = 0;
 	var clickerPrevious = document.getElementById("click_previous");
 	clickerPrevious.onclick = function () {
 		$scope.startMyAwesomeApp()
-		index--;
+		if (index > max) {
+			index--;
+		}
 		console.log(index);
 	}
 
@@ -81,6 +86,8 @@ function mainCtrl($scope, $http) {
 
 				console.log($scope.myDynamicHost[index]);
 				$scope.PlanetHost = $scope.myDynamicHost[index];
+
+				max = $scope.myDynamicPlanet.length
 
 
 
