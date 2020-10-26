@@ -51,7 +51,7 @@ function mainCtrl($scope, $http) {
 												OPTIONAL { ?PlanetName  on:HasNumberOfHosts  ?NumberOfStars }
 												OPTIONAL { ?PlanetName  on:HasTemperature  ?Temp }
 												OPTIONAL { ?PlanetName  on:HasHostTemperature  ?StellarTemp }
-												}`).replace(/#/g, '%23');
+												}LIMIT 10`).replace(/#/g, '%23');
 
 		$http({
 				method: "GET",
@@ -64,16 +64,30 @@ function mainCtrl($scope, $http) {
 			.success(function (data, status) {
 				$scope.myDynamicLabels = [];
 				$scope.myDynamicPlanetName = [];
+				$scope.myDynamicDensity = [];
+				$scope.myDynamicMass = [];
+				$scope.myDynamicSize = [];
+				$scope.myDynamicNumberOfStars = [];
 				$scope.myDynamicHost = [];
+				$scope.myDynamicTemp = [];
+				$scope.myDynamicStellarTemp = [];
+
 				// now iterate on the results
 				angular.forEach(data.results.bindings, function (val) {
 					// $scope.myDynamicLabels.push(val.country.value.split('/')[3]);
 					$scope.myDynamicPlanetName.push(val.PlanetName.value.split('/')[6]);
+					// $scope.myDynamicDensity.push(val.Density.value);s
+					$scope.myDynamicMass.push(val.Mass.value);
+					$scope.myDynamicSize.push(val.Size.value);
+					$scope.myDynamicNumberOfStars.push(val.NumberOfStars.value);
 					$scope.myDynamicHost.push(val.Host.value);
+					// $scope.myDynamicTemp.push(val.Temp.value);
+					$scope.myDynamicStellarTemp.push(val.StellarTemp.value);
 				});
-				$scope.myDynamicData = [$scope.myDynamicPlanetName, $scope.myDynamicHost]
-				console.log($scope.myDynamicData)
+				$scope.myDynamicData = [$scope.myDynamicPlanetName, $scope.myDynamicDensity, $scope.myDynamicMass, $scope.myDynamicSize, $scope.myDynamicNumberOfStars, $scope.myDynamicHost, $scope.myDynamicTemp, $scope.myDynamicStellarTemp]
 				console.log("myDynamicData")
+				console.log($scope.myDynamicData)
+
 
 				// for (const row of $scope.myDynamicData) {
 				// 	// console.log(row);
@@ -83,8 +97,26 @@ function mainCtrl($scope, $http) {
 				console.log($scope.myDynamicPlanetName[index]);
 				$scope.Planet = $scope.myDynamicPlanetName[index].replace(/%20/gi, ' ');
 
+				console.log($scope.myDynamicDensity[index]);
+				$scope.PlanetDensity = $scope.myDynamicDensity[index];
+
+				console.log($scope.myDynamicMass[index]);
+				$scope.PlanetMass = $scope.myDynamicMass[index];
+
+				console.log($scope.myDynamicSize[index]);
+				$scope.PlanetSize = $scope.myDynamicSize[index];
+
+				console.log($scope.myDynamicNumberOfStars[index]);
+				$scope.PlanetNumberOfStars = $scope.myDynamicNumberOfStars[index];
+
 				console.log($scope.myDynamicHost[index]);
 				$scope.PlanetHost = $scope.myDynamicHost[index];
+
+				console.log($scope.myDynamicTemp[index]);
+				$scope.PlanetTemp = $scope.myDynamicTemp[index];
+
+				console.log($scope.myDynamicStellarTemp[index]);
+				$scope.StellarTemp = $scope.myDynamicStellarTemp[index];
 
 
 
